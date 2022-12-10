@@ -11,14 +11,9 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       ddl-auto: none
     show-sql: true
-
----
-spring:
-  config:
-    activate:
-      on-profile: dev-mysql
   datasource:
-    url: jdbc:mysql://localhost:3306/library
+    url: jdbc:postgresql://localhost:5432/library
+    driver-class-name: org.postgresql.Driver
     username: root
     password: 12345
   sql:

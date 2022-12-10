@@ -1,0 +1,87 @@
+html {
+    min-width: 780px;
+    padding: 4px 30px 4px 30px;
+}
+
+.header {
+    padding: 4px 0 4px 0;
+}
+.users {
+    background-color: #fbb;
+    padding: 8px;
+}
+.header span {
+    margin: 0 4px 0 4px;
+    padding: 4px 30px 4px 30px;
+    color: #2c5877;
+    background-color: #eee;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.header span:hover {
+    background-color: #ddd;
+}
+
+#menu {
+    display: inline-block;
+}
+
+#login {
+    float: right;
+}
+
+span.username{
+    background-color: #cfc;
+}
+
+span.username:hover {
+    background-color: #cfc;
+}
+
+.content {
+    min-height: calc(100vh - 100px);
+}
+
+.footer {
+    padding: 4px 0 4px 0;
+    background-color: #eee;
+    text-align: center;
+}
+
+h1 {
+    margin-left: 60px;
+}
+
+.table-list {
+    margin: 4px 30px 4px 30px;
+    border: 1px solid lightsteelblue;
+    border-collapse: collapse;
+}
+
+.table-list th {
+    padding: 5px;
+    border: 1px solid lightsteelblue;
+}
+
+.table-list td {
+    padding: 4px;
+    border: 1px solid lightsteelblue;
+}
+
+.edit-form-table {
+    border: none;
+    margin-bottom: 16px;
+    min-width: 480px;
+}
+.edit-form-table td {
+    padding: 4px 12px 4px 12px;
+}
+
+.edit-form-table input {
+    width: 320px;
+}
+
+.error {
+    color: red;
+}

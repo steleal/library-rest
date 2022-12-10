@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="/common.css">
+    <meta charset="UTF-8">
+    <title>Hello to Book</title>
+</head>
+<body th:with="menu='user-edit'">
+<div th:replace="_user::body"></div>
+<div th:remove="All">
+    <div th:fragment="allcontent">
+        <h1>Редактировать пользователя</h1>
+        <form action="#"
+              th:action="@{/users/save}"
+              th:object="${user}"
+              method="post">
+            <input type="hidden" th:field="*{id}" id="id">
+            <table class="edit-form-table">
+                <tbody>
+                <tr>
+                    <td>
+                        <label for="username">Логин</label>
+                    </td>
+                    <td>
+                        <input type="text" th:field="*{username}" id="username" placeholder="Username">
+                    </td>
+                    <td>
+                        <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="password">Пароль</label>
+                    </td>
+                    <td>
+                        <!--                хак, чтобы поле помнило пароль: вместо field - value-->
+                        <input type="password" th:value="*{password}" id="password" name="password"
+                               placeholder="*********">
+                    </td>
+                    <td>
+                        <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="enabled">Включена</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" th:field="*{enabled}" id="enabled">
+                    </td>
+                    <td>
+                        <span class="error" th:if="${#fields.hasErrors('enabled')}" th:errors="*{enabled}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="role">Роль</label>
+                    </td>
+                    <td>
+                        <select th:field="*{role}" id="role">
+                            <option th:each="r : ${roles}"
+                                    th:value="${r.getRole()}"
+                                    th:utext="${r.name()}"></option>
+                        </select>
+                    </td>
+                    <td>
+                        <span class="error" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <input type="submit" value="Сохранить изменения">
+        </form>
+    </div>
+</div>
+</body>
+</html>

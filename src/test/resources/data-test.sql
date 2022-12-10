@@ -1,0 +1,1 @@
+INSERT INTO AUTHORS (ID, FULL_NAME, BIRTHDAY) VALUES (1, 'Толстой Лев Николаевич' , 1828);

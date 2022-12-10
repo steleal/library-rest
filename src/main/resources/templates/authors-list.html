@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/common.css" th:href="common.css">
+    <meta charset="UTF-8">
+    <title>Hello to Book</title>
+</head>
+<body th:with="menu='authors'">
+<div th:replace="_main::body"></div>
+<div th:remove="All">
+    <div th:fragment="allcontent">
+        <h1>Авторы</h1>
+        <table class="table-list">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>Фамилия, Имя, Отчество</th>
+                <th>Год</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="author : ${authors}">
+                <td th:text="${author.id}">1</td>
+                <td th:text="${author.fullName}">Иванов Иван Иванович</td>
+                <td th:text="${author.birthday}">0000</td>
+                <td sec:authorize="hasRole('EDITOR')"><a th:href="@{/authors/edit(id=${author.id})}">Edit</a></td>
+                <td sec:authorize="hasRole('EDITOR')"><a th:href="@{/authors/delete(id=${author.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <p sec:authorize="hasRole('EDITOR')"><a href="/authors/new">Добавить новую запись</a></p>
+    </div>
+</div>
+</body>
+</html>

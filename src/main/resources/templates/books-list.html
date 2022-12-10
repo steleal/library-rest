@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/common.css" th:href="common.css">
+    <meta charset="UTF-8">
+    <title>Hello to Book</title>
+</head>
+<body th:with="menu='books'">
+<div th:replace="_main::body"></div>
+<div th:remove="All">
+    <div th:fragment="allcontent">
+        <h1>Книги</h1>
+        <table class="table-list">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>Название</th>
+                <th>Автор</th>
+                <th>Жанр</th>
+                <th>Издатель</th>
+                <th>Год издания</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book : ${books}">
+                <td th:text="${book.id}">1</td>
+                <td th:text="${book.title}">Название</td>
+                <td th:text="${book.author}">Автор</td>
+                <td th:text="${book.genre}">Жанр</td>
+                <td th:text="${book.publisher}">Издатель</td>
+                <td th:text="${book.publishYear}">Год публикации</td>
+                <td sec:authorize="hasRole('EDITOR')"><a th:href="@{/books/edit(id=${book.id})}">Edit</a></td>
+                <td sec:authorize="hasRole('EDITOR')"><a th:href="@{/books/delete(id=${book.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <p sec:authorize="hasRole('EDITOR')"><a href="/books/new">Добавить новую запись</a></p>
+    </div>
+</div>
+</body>
+</html>

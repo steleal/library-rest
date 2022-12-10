@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 public class DtoToGenreConverter implements Converter<GenreDto, Genre> {
     @Override
     public Genre convert(GenreDto source) {
-        return new Genre(source.getId(), source.getName());
+        return new Genre(source.getId() == null ? 0 : source.getId(),
+                source.getName());
     }
 }

@@ -4,14 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PublisherDto {
-    private long id;
-    @NotBlank(message = "Название не должно быть пустым")
+    private Long id;
     private String name;
 
     @Override

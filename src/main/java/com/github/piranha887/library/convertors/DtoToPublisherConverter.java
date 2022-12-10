@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 public class DtoToPublisherConverter implements Converter<PublisherDto, Publisher> {
     @Override
     public Publisher convert(PublisherDto source) {
-        return new Publisher(source.getId(), source.getName());
+        return new Publisher(source.getId() == null ? 0 : source.getId(),
+                source.getName());
     }
 }

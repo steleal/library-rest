@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 public class LibraryApplication {
 
     public static void main(String[] args) {
-        ApplicationContext context = SpringApplication.run(LibraryApplication.class, args);
+        SpringApplication.run(LibraryApplication.class, args);
     }
 
 }

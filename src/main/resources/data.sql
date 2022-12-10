@@ -1,9 +1,3 @@
--- admin - admin, editor - editor, Ilya - 1234
-INSERT INTO USERS(ID, USERNAME, PASSWORD, ROLE)
-VALUES (1, 'admin', '$2a$08$tpmF.ZPvokZ6AaDgHcks0eMOAyVul0InLlPgonFacoGsnGU8POKsS', 'ROLE_ADMIN'),
-       (2, 'editor', '$2a$08$QhEg/GMl/ZhlDIUAxsHc6.e.FdfZCP8gxbrwqgN5Ex7jYZ/CDaShW', 'ROLE_EDITOR'),
-       (3, 'Ilya', '$2a$08$eRpDPl2fwz4LwNanuwKGEujdC6DHz1uyfaPTBRPIbTaFUUGf14Zym', 'ROLE_READER');
-
 INSERT INTO GENRES (ID, NAME) VALUES (1, 'Роман');
 INSERT INTO GENRES (ID, NAME) VALUES (2, 'Повесть');
 INSERT INTO GENRES (ID, NAME) VALUES (3, 'Рассказ');

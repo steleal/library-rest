@@ -2,6 +2,7 @@ package com.github.piranha887.library.convertors;
 
 import com.github.piranha887.library.domain.Book;
 import com.github.piranha887.library.dto.BookDto;
+import com.github.piranha887.library.exceptions.NotFoundException;
 import com.github.piranha887.library.repositories.AuthorRepository;
 import com.github.piranha887.library.repositories.GenreRepository;
 import com.github.piranha887.library.repositories.PublisherRepository;
@@ -18,12 +19,15 @@ public class DtoToBookConverter implements Converter<BookDto, Book> {
 
     @Override
     public Book convert(BookDto source) {
+        Long authorId = source.getAuthorId();
+        Long genreId = source.getGenreId();
+        Long pubId = source.getPublisherId();
         return new Book(
-                source.getId(),
+                source.getId() == null ? 0 : source.getId(),
                 source.getTitle(),
-                authorRepository.findById(source.getAuthorId()).get(),
-                genreRepository.findById(source.getGenreId()).get(),
-                publisherRepository.findById(source.getPublisherId()).get(),
+                authorRepository.findById(authorId).orElseThrow(() -> new NotFoundException("Author", authorId)),
+                genreRepository.findById(genreId).orElseThrow(() -> new NotFoundException("Genre", genreId)),
+                publisherRepository.findById(pubId).orElseThrow(() -> new NotFoundException("Publisher", pubId)),
                 source.getPublishYear()
         );
     }

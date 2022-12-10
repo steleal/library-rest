@@ -13,12 +13,12 @@ public class BookToDtoConverter implements Converter<Book, BookDto> {
         return new BookDto(
                 source.getId(),
                 source.getTitle(),
-                source.getAuthor().getFullName(),
                 source.getAuthor().getId(),
-                source.getGenre().getName(),
+                source.getAuthor().getFullName(),
                 source.getGenre().getId(),
-                source.getPublisher().getName(),
+                source.getGenre().getName(),
                 source.getPublisher().getId(),
+                source.getPublisher().getName(),
                 source.getPublishYear()
         );
     }

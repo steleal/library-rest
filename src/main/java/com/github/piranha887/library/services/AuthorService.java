@@ -4,6 +4,7 @@ import com.github.piranha887.library.convertors.AuthorToDtoConverter;
 import com.github.piranha887.library.convertors.DtoToAuthorConverter;
 import com.github.piranha887.library.domain.Author;
 import com.github.piranha887.library.dto.AuthorDto;
+import com.github.piranha887.library.exceptions.NotFoundException;
 import com.github.piranha887.library.repositories.AuthorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class AuthorService {
     public AuthorDto getById(long authorId) {
         return repository.findById(authorId)
                 .map(toDto::convert)
-                .orElseThrow(() -> new RuntimeException("Author not found"));
+                .orElseThrow(() -> new NotFoundException("Author", authorId));
     }
 
     public long add(AuthorDto authorDto) {
@@ -42,7 +43,7 @@ public class AuthorService {
     }
 
     public void update(long authorId, AuthorDto authorDto) {
-        Author author = repository.findById(authorId).orElseThrow(() -> new RuntimeException("Author not found"));
+        Author author = repository.findById(authorId).orElseThrow(() -> new NotFoundException("Author", authorId));
         updateFields(author, authorDto);
         repository.save(author);
     }
@@ -51,7 +52,7 @@ public class AuthorService {
         if (repository.existsById(authorId)) {
             repository.deleteById(authorId);
         } else {
-            throw new RuntimeException("Author not found");
+            throw new NotFoundException("Author", authorId);
         }
     }
 

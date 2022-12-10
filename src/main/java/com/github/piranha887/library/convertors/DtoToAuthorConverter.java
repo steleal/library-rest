@@ -10,7 +10,7 @@ public class DtoToAuthorConverter implements Converter<AuthorDto, Author> {
     @Override
     public Author convert(AuthorDto source) {
         return new Author(
-                source.getId(),
+                source.getId() == null ? 0 : source.getId(),
                 source.getFullName(),
                 source.getBirthday()
         );

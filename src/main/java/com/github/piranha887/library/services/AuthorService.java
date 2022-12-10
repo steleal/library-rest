@@ -36,16 +36,13 @@ public class AuthorService {
     }
 
     public long add(AuthorDto authorDto) {
-        Author author = toAuthor.convert(authorDto);
-        author.setId(0);
-        Author save = repository.save(author);
+        Author save = repository.save(toAuthor.convert(authorDto));
         return save.getId();
     }
 
     public void update(long authorId, AuthorDto authorDto) {
-        Author author = repository.findById(authorId).orElseThrow(() -> new NotFoundException("Author", authorId));
-        updateFields(author, authorDto);
-        repository.save(author);
+        authorDto.setId(authorId);
+        repository.save(toAuthor.convert(authorDto));
     }
 
     public void delete(long authorId) {
@@ -56,16 +53,4 @@ public class AuthorService {
         }
     }
 
-    private void updateFields(Author author, AuthorDto authorDto) {
-        if (authorDto != null) {
-            String fullName = authorDto.getFullName();
-            if (fullName != null) {
-                author.setFullName(fullName);
-            }
-            Integer birthday = authorDto.getBirthday();
-            if (birthday != null) {
-                author.setBirthday(birthday);
-            }
-        }
-    }
 }

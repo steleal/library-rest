@@ -35,17 +35,14 @@ public class PublisherService {
                 .orElseThrow(() -> new NotFoundException("Publisher", publisherId));
     }
 
-    public long add(PublisherDto PublisherDto) {
-        Publisher publisher = toPublisher.convert(PublisherDto);
-        publisher.setId(0);
-        Publisher save = repository.save(publisher);
+    public long add(PublisherDto publisherDto) {
+        Publisher save = repository.save(toPublisher.convert(publisherDto));
         return save.getId();
     }
 
-    public void update(long publisherId, PublisherDto PublisherDto) {
-        Publisher publisher = repository.findById(publisherId).orElseThrow(() -> new NotFoundException("Publisher", publisherId));
-        updateFields(publisher, PublisherDto);
-        repository.save(publisher);
+    public void update(long publisherId, PublisherDto publisherDto) {
+        publisherDto.setId(publisherId);
+        repository.save(toPublisher.convert(publisherDto));
     }
 
     public void delete(long publisherId) {
@@ -56,12 +53,4 @@ public class PublisherService {
         }
     }
 
-    private void updateFields(Publisher publisher, PublisherDto PublisherDto) {
-        if (PublisherDto != null) {
-            String name = PublisherDto.getName();
-            if (name != null) {
-                publisher.setName(name);
-            }
-        }
-    }
 }

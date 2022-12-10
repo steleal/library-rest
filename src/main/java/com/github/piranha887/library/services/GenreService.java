@@ -35,17 +35,14 @@ public class GenreService {
                 .orElseThrow(() -> new NotFoundException("Genre", genreId));
     }
 
-    public long add(GenreDto GenreDto) {
-        Genre genre = toGenre.convert(GenreDto);
-        genre.setId(0);
-        Genre save = repository.save(genre);
+    public long add(GenreDto genreDto) {
+        Genre save = repository.save(toGenre.convert(genreDto));
         return save.getId();
     }
 
-    public void update(long genreId, GenreDto GenreDto) {
-        Genre genre = repository.findById(genreId).orElseThrow(() -> new NotFoundException("Genre", genreId));
-        updateFields(genre, GenreDto);
-        repository.save(genre);
+    public void update(long genreId, GenreDto genreDto) {
+        genreDto.setId(genreId);
+        repository.save(toGenre.convert(genreDto));
     }
 
     public void delete(long genreId) {
@@ -56,12 +53,4 @@ public class GenreService {
         }
     }
 
-    private void updateFields(Genre genre, GenreDto genreDto) {
-        if (genreDto != null) {
-            String name = genreDto.getName();
-            if (name != null) {
-                genre.setName(name);
-            }
-        }
-    }
 }
